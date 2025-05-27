@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Stonex Ceramics</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #ffffff;
+            --accent-color: #e74c3c;
+            --gray-color: #333333;
+            --transition: all 0.4s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--secondary-color);
+            background-color: var(--primary-color);
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-heading {
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-heading h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .section-heading .elegant {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+        
+        .btn-custom {
+            background-color: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-custom:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .btn-custom:hover {
+            color: var(--secondary-color);
+            border-color: var(--accent-color);
+        }
+        
+        .btn-custom:hover:before {
+            width: 100%;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .header.scrolled {
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 10px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 36px;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        .nav-link {
+            color: var(--secondary-color) !important;
+            font-weight: 500;
+            font-size: 18px;
+            padding: 10px 20px !important;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-link:before {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 20px;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover:before {
+            width: calc(100% - 40px);
+        }
+        
+        /* Custom Navbar Styles */
+        .custom-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 10px 15px;
+        }
+        
+        .menu-toggle {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-menu li {
+            margin-left: 20px;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        
+        .navbar-toggler-icon {
+            width: 1.5em;
+            height: 1.5em;
+        }
+        
+        @media (max-width: 991.98px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: rgba(0, 0, 0, 0.95);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 20px 0;
+                z-index: 1000;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-link {
+                padding: 12px 15px !important;
+                text-align: center;
+                margin: 5px 0;
+                border-radius: 4px;
+            }
+            
+            .nav-link:hover {
+                background-color: rgba(231, 76, 60, 0.1);
+            }
+            
+            .nav-link:before {
+                bottom: 8px;
+                left: 15px;
+            }
+            
+            .logo {
+                font-size: 28px; /* Slightly smaller on mobile */
+            }
+        }
+        
+        @media (max-width: 575.98px) {
+            body {
+                overflow-x: hidden;
+                width: 100%;
+            }
+            
+            .header {
+                padding: 10px 0;
+                width: 100%;
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
+            
+            .logo {
+                font-size: 20px; /* Even smaller on very small screens */
+                max-width: 65%;
+            }
+            
+            .navbar-toggler {
+                padding: 2px 6px;
+                margin-right: 0;
+            }
+            
+            .navbar-toggler-icon {
+                width: 1.1em;
+                height: 1.1em;
+            }
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1594741158704-5a725398682e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.3s;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.6s;
+        }
+        
+        .hero-btn {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.9s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Quick Glance Section */
+        .quick-glance {
+            background-color: var(--primary-color);
+            position: relative;
+        }
+        
+        .quick-glance-item {
+            background-color: #111;
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 5px;
+            transition: var(--transition);
+            margin-bottom: 30px;
+            height: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quick-glance-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .quick-glance-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .quick-glance-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .quick-glance-item p {
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+        
+        /* About Section */
+        .about {
+            background-color: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+            
+        }
+        
+        .about-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            height: 100%;
+            margin-right: 5rem;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-image:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(231, 76, 60, 0.2);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .about-image:hover:before {
+            opacity: 1;
+        }
+        
+        .about-content {
+            padding: 30px 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .about-content h2 {
+            margin-bottom: 30px;
+        }
+        
+        .about-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: #ddd;
+        }
+        
+        .stats-item {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .stats-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+        
+        .stats-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* Products Section */
+        .products {
+            background-color: var(--primary-color);
+        }
+        
+        .product-category {
+            position: relative;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .product-img {
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .product-category:hover img {
+            transform: scale(1.1);
+        }
+        
+        .product-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            transform: translateY(20px);
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+        
+        .product-category:hover .product-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .product-overlay h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .product-overlay p {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+        
+        /* Advantages Section */
+        .advantages {
+            background-color: #0a0a0a;
+            position: relative;
+        }
+        
+        .advantage-item {
+            position: relative;
+            padding: 30px;
+            background-color: #111;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+        
+        .advantage-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .advantage-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .advantage-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .advantage-item p {
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.7;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            background-color: var(--primary-color);
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            height: 300px;
+            border-radius: 10px;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(231, 76, 60, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: #0a0a0a;
+        }
+        
+        .contact-form {
+            background-color: #111;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .form-control {
+            background-color: rgba(255, 255, 255, 225);
+            border: none;
+            border-radius: 5px;
+            color: var(--secondary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .form-control:focus {
+            background-color: rgba(255, 254, 254, 0.8);
+            color: var(--secondary-color);
+            box-shadow: none;
+        }
+        
+        .contact-info {
+            background-color: #111;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+        
+        .contact-icon {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-right: 20px;
+        }
+        
+        .contact-details h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .contact-details p {
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+        
+        .map-container {
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #070707;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-about {
+            margin-bottom: 30px;
+        }
+        
+        .footer-about h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .footer-about p {
+            color: #ccc;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        .footer-links h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links ul li a {
+            color: #ccc;
+            transition: var(--transition);
+            display: block;
+            font-size: 0.95rem;
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--accent-color);
+            padding-left: 10px;
+        }
+        
+        .footer-social h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .social-icons {
+            display: flex;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.08);
+            color: var(--secondary-color);
+            margin-right: 15px;
+            transition: var(--transition);
+        }
+        
+        .social-icon:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 50px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 991px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .section-heading h2 {
+                font-size: 2.5rem;
+            }
+            
+            .stats-number {
+                font-size: 2.5rem;
+            }
+            
+            .contact-info {
+                margin-top: 30px;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .section-heading h2 {
+                font-size: 2rem;
+            }
+            
+            .about-image {
+                margin-bottom: 30px;
+            }
+            
+            .stats-item {
+                margin-bottom: 30px;
+            }
+            
+            .footer-about, .footer-links, .footer-social {
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* Loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader-inner {
+            width: 100px;
+            height: 100px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--accent-color);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-inner"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="custom-navbar">
+                <a class="logo" href="#">Stonex<span>Ceramics</span></a>
+                <button class="menu-toggle" id="menu-toggle">
+                    <i class='bx bx-menu'></i>
+                </button>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a class="nav-link" href="#home">Home</a></li>
+                    <li><a class="nav-link" href="#about">About</a></li>
+                    <li><a class="nav-link" href="#products">Products</a></li>
+                    <li><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <li><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Elevate Your Space With Premium Ceramic Tiles</h1>
+                <p>Crafting excellence since 1982. Discover our world-class collection of tiles designed to transform your spaces.</p>
+                <a href="#products" class="btn btn-custom hero-btn">Explore Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="about-image">
+                                 <img src="https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Stonex Factory">
+
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="about-content">
+                        <div class="section-heading">
+                            <h2><span class="elegant">About</span> Company</h2>
+                        </div>
+                        <p>Established in 1982, Stonex Ceramics has been at the forefront of the tile industry for over 40 years. With unwavering energy and dedication to our commitments, we have continuously evolved to meet changing market demands while maintaining our core values of quality and innovation.</p>
+                        <p>Our transformative and novel ideas have revolutionized the ceramic industry, earning us numerous honorary awards. We take pride in our remarkable position in the global ceramic market and remain dedicated to serving our valuable customers who appreciate our commitment to excellence.</p>
+                        <p>At Stonex Ceramics, we combine traditional craftsmanship with cutting-edge technology to create tiles that not only meet but exceed international standards. Our passion for design and quality drives us to constantly push boundaries and set new benchmarks in the industry.</p>
+                        <a href="#products" class="btn btn-custom mt-4">Discover Our Products</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stats-item">
+                        <div class="stats-number" data-count="1700">0</div>
+                        <div class="stats-label">Tile Designs</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stats-item">
+                        <div class="stats-number" data-count="1272">0</div>
+                        <div class="stats-label">Happy Clients</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stats-item">
+                        <div class="stats-number" data-count="30">0</div>
+                        <div class="stats-label">Export Countries</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stats-item">
+                        <div class="stats-number" data-count="848">0</div>
+                        <div class="stats-label">Projects Completed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-heading text-center" data-aos="fade-up">
+                <h2><span class="elegant">Our</span> Products</h2>
+                <p>Discover our premium collection of tiles for every space in your home</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-category">
+                        <div class="product-img">
+                            <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kitchen Tiles">
+                        </div>
+                        <div class="product-overlay">
+                            <h3>Kitchen Tiles</h3>
+                            <p>Durable, stain-resistant tiles designed specifically for kitchen spaces. Our kitchen collection combines practicality with stunning aesthetics.</p>
+                            <a href="#" class="btn btn-custom btn-sm">View Collection</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-category">
+                        <div class="product-img">
+                            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bathroom Tiles">
+                        </div>
+                        <div class="product-overlay">
+                            <h3>Bathroom Tiles</h3>
+                            <p>Water-resistant, anti-slip bathroom tiles that create a luxurious spa-like atmosphere while ensuring safety and durability.</p>
+                            <a href="#" class="btn btn-custom btn-sm">View Collection</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="product-category">
+                        <div class="product-img">
+                            <img src="https://images.unsplash.com/photo-1600607687126-8a3414349a51?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Elevation Tiles">
+                        </div>
+                        <div class="product-overlay">
+                            <h3>Elevation Tiles</h3>
+                            <p>Weather-resistant exterior tiles that enhance the aesthetic appeal of your building while providing protection against the elements.</p>
+                            <a href="#" class="btn btn-custom btn-sm">View Collection</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Glance Section -->
+    <section class="quick-glance" id="quick-glance">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="quick-glance-item">
+                        <i class='bx bx-package quick-glance-icon'></i>
+                        <h3>Largest Exporter</h3>
+                        <p>With our oversized manufacturing plant, we fulfill deliveries worldwide with exceptional quality and timeliness.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="quick-glance-item">
+                        <i class='bx bx-building-house quick-glance-icon'></i>
+                        <h3>World Class Technology</h3>
+                        <p>Equipped with cutting-edge technology to create next-generation ceramic products with precision and innovation.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="quick-glance-item">
+                        <i class='bx bx-medal quick-glance-icon'></i>
+                        <h3>Top 10 Brand</h3>
+                        <p>Consistently ranked in the top 10 brands, delivering exceptional satisfaction to clients across the globe.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="quick-glance-item">
+                        <i class='bx bx-globe quick-glance-icon'></i>
+                        <h3>Growing Network</h3>
+                        <p>Rapidly expanding our international reach with a strong commitment to global market presence and service.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section class="advantages" id="advantages">
+        <div class="container">
+            <div class="section-heading text-center" data-aos="fade-up">
+                <h2><span class="elegant">Our</span> Advantages</h2>
+                <p>Why choose Stonex Ceramics for your tiling needs</p>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="advantage-item">
+                        <i class='bx bx-check-shield advantage-icon'></i>
+                        <h3>Superior Quality</h3>
+                        <p>Our tiles undergo rigorous quality control tests to ensure they meet the highest international standards. Every piece that leaves our factory is a testament to our commitment to excellence.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="advantage-item">
+                        <i class='bx bx-paint advantage-icon'></i>
+                        <h3>Innovative Designs</h3>
+                        <p>Our design team constantly researches global trends to create tiles that are not only functional but also aesthetically pleasing. With over 1700 unique designs, you'll find the perfect match for your space.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="advantage-item">
+                        <i class='bx bx-time advantage-icon'></i>
+                        <h3>Durability</h3>
+                        <p>Stonex Ceramics tiles are built to last. We use the finest materials and cutting-edge technology to ensure that our products remain beautiful and functional for decades.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="advantage-item">
+                        <i class='bx bx-leaf advantage-icon'></i>
+                        <h3>Eco-Friendly</h3>
+                        <p>We are committed to sustainable manufacturing practices. Our production process minimizes waste and energy consumption, making our tiles an environmentally responsible choice.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="advantage-item">
+                        <i class='bx bx-support advantage-icon'></i>
+                        <h3>Expert Support</h3>
+                        <p>Our team of experts is always ready to assist you in choosing the right tiles for your project. From selection to installation, we provide guidance every step of the way.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="advantage-item">
+                        <i class='bx bx-world advantage-icon'></i>
+                        <h3>Global Presence</h3>
+                        <p>With exports to over 30 countries, Stonex Ceramics has a strong global presence. Our international standards and competitive pricing make us a preferred choice worldwide.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-heading text-center" data-aos="fade-up">
+                <h2><span class="elegant">Our</span> Gallery</h2>
+                <p>Browse through our showcase of stunning tile installations</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Modern Bathroom">
+                        <div class="gallery-overlay">
+                            <i class='bx bx-search gallery-icon'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1556909172-54557c7e4fb7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Luxury Kitchen">
+                        <div class="gallery-overlay">
+                            <i class='bx bx-search gallery-icon'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1600566752355-35492a8dc2c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Contemporary Living Room">
+                        <div class="gallery-overlay">
+                            <i class='bx bx-search gallery-icon'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Outdoor Patio">
+                        <div class="gallery-overlay">
+                            <i class='bx bx-search gallery-icon'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Elegant Bedroom">
+                        <div class="gallery-overlay">
+                            <i class='bx bx-search gallery-icon'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1592928302636-c83cf1e1c887?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Commercial Space">
+                        <div class="gallery-overlay">
+                            <i class='bx bx-search gallery-icon'></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-heading text-center" data-aos="fade-up">
+                <h2><span class="elegant">Contact</span> Us</h2>
+                <p>Get in touch with our team for inquiries, quotes, or expert advice</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="contact-form">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Your Name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" placeholder="Your Email" required>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Subject">
+                            <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                            <button type="submit" class="btn btn-custom w-100">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="contact-info">
+                        <div class="contact-info-item">
+                            <i class='bx bx-map contact-icon'></i>
+                            <div class="contact-details">
+                                <h4>Our Location</h4>
+                                <p>123 Tile Street, Ceramic City, TC 12345</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <i class='bx bx-phone contact-icon'></i>
+                            <div class="contact-details">
+                                <h4>Phone Number</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <i class='bx bx-envelope contact-icon'></i>
+                            <div class="contact-details">
+                                <h4>Email Address</h4>
+                                <p>info@stonexceramics.com</p>
+                            </div>
+                        </div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00369368400567!3d40.71312937933185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a23e28c1191%3A0x49f75d3281df052a!2s123%20Street%2C%20New%20York%2C%20NY%2010001%2C%20USA!5e0!3m2!1sen!2sin!4v1620456523403!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-about">
+                        <h3>Stonex<span style="color: var(--accent-color);">Ceramics</span></h3>
+                        <p>With over 40 years of experience in the ceramic industry, we pride ourselves on delivering quality tiles that transform spaces into works of art. Our commitment to innovation and excellence makes us a leader in the global market.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="footer-links">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#products">Products</a></li>
+                            <li><a href="#gallery">Gallery</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="footer-social">
+                        <h3>Follow Us</h3>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class='bx bxl-facebook'></i></a>
+                            <a href="#" class="social-icon"><i class='bx bxl-twitter'></i></a>
+                            <a href="#" class="social-icon"><i class='bx bxl-instagram'></i></a>
+                            <a href="#" class="social-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Stonex Ceramics. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class='bx bx-up-arrow-alt'></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+        
+        // Header scroll class
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('.header').addClass('scrolled');
+                $('.back-to-top').addClass('active');
+            } else {
+                $('.header').removeClass('scrolled');
+                $('.back-to-top').removeClass('active');
+            }
+        });
+        
+        // Back to top button
+        $('.back-to-top').click(function(e) {
+            e.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 800);
+        });
+        
+        // Smooth scrolling
+        $('a.nav-link').click(function(e) {
+            if (this.hash !== '') {
+                e.preventDefault();
+                const hash = this.hash;
+                
+                // Close mobile menu when clicking a nav link
+                if ($('.navbar-collapse').hasClass('show')) {
+                    $('.navbar-collapse').collapse('hide');
+                }
+                
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top - 80
+                }, 800);
+            }
+        });
+        
+        // Handle navbar on mobile devices
+        $(document).ready(function() {
+            // Add active class to nav items when scrolling
+            $(window).on('scroll', function() {
+                var scrollPosition = $(document).scrollTop();
+                
+                // Check each section's position and add 'active' class to corresponding nav item
+                $('section').each(function() {
+                    var targetPosition = $(this).offset().top - 100;
+                    var sectionId = $(this).attr('id');
+                    
+                    if (scrollPosition >= targetPosition) {
+                        $('.navbar-nav .nav-link').removeClass('active');
+                        $('.navbar-nav .nav-link[href="#' + sectionId + '"]').addClass('active');
+                    }
+                });
+            });
+            
+            // Improve mobile menu behavior
+            $('.navbar-toggler').on('click', function() {
+                $(this).toggleClass('active');
+            });
+        });
+        
+        // Number counter animation
+        function counter() {
+            $('.stats-number').each(function() {
+                const $this = $(this);
+                const countTo = $this.attr('data-count');
+                
+                $({countNum: $this.text()}).animate({
+                    countNum: countTo
+                }, {
+                    duration: 2000,
+                    easing: 'swing',
+                    step: function() {
+                        $this.text(Math.floor(this.countNum));
+                    },
+                    complete: function() {
+                        $this.text(this.countNum);
+                    }
+                });
+            });
+        }
+        
+        // Fire counter animation when stats section comes into view
+        const statsSection = document.querySelector('.stats-item');
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                counter();
+                observer.disconnect();
+            }
+        });
+        
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+        
+        // Page loader
+        $(window).on('load', function() {
+            setTimeout(function() {
+                $('.loader').addClass('fade-out');
+            }, 500);
+        });
+        
+        // Mobile Menu Toggle
+        $(document).ready(function() {
+            $('#menu-toggle').click(function() {
+                $('#nav-menu').toggleClass('active');
+            });
+            
+            // Close menu when clicking a link
+            $('.nav-link').click(function() {
+                $('#nav-menu').removeClass('active');
+            });
+        });
+    </script>
+</body>
+</html>
+
+    
