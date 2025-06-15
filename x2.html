@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Bathroom Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            background: linear-gradient(45deg, #000000, #333333);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.3);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff8c00, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 140, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 140, 0, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff8c00;
+            display: block;
+        }
+
+        .back-home {
+            background: linear-gradient(45deg, #ff8c00, #ffa500);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .back-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.4);
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid #ff8c00;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(45deg, #ff8c00, #ffa500);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 140, 0, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 140, 0, 0.3);
+            border-color: #ff8c00;
+        }
+
+        .product-image {
+            height: 300px;
+            width: 100%;
+            background: linear-gradient(45deg, #333, #555);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 140, 0, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .product-card:hover .product-image::before {
+            left: 100%;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-category {
+            background: rgba(255, 140, 0, 0.2);
+            color: #ff8c00;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .product-description {
+            color: #cccccc;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .product-features li {
+            color: #aaaaaa;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .product-features li::before {
+            content: '✓';
+            color: #ff8c00;
+            position: absolute;
+            left: 0;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            background: rgba(255, 140, 0, 0.1);
+            color: #ffffff;
+            border: 1px solid #ff8c00;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: linear-gradient(45deg, #ff8c00, #ffa500);
+            transform: translateY(-2px);
+        }
+
+        .pagination button.active {
+            background: linear-gradient(45deg, #ff8c00, #ffa500);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .page-info {
+            color: #cccccc;
+            font-size: 0.9rem;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .filters {
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                font-size: 0.8rem;
+                padding: 8px 16px;
+            }
+            
+            .pagination {
+                gap: 10px;
+            }
+            
+            .pagination button {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Premium Tiles Collection</h1>
+            <p>Discover our exclusive range of luxury Tiles products</p>
+            <div class="stats">
+                <div class="stat-card">
+                    <span class="stat-number">30+</span>
+                    Premium Products
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">3</span>
+                    Product Categories
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    Quality Guarantee
+                </div>
+            </div>
+            <button class="back-home" onclick="goHome()">🏠 Back to Home</button>
+        </header>
+
+        <div class="filters">
+            <button class="filter-btn active" data-category="all">All Products</button>
+            <button class="filter-btn" data-category="wc">🛁 Bathroom Tiles</button>
+            <button class="filter-btn" data-category="basin">🚿 Kitchen Tiles</button>
+            <button class="filter-btn" data-category="suite">💎 elevation Tiles</button>
+            <!-- <button class="filter-btn" data-category="premium"> Premium Range</button> -->
+        </div>
+
+        <div class="page-info" id="pageInfo"></div>
+
+        <div class="products-grid" id="productsGrid"></div>
+
+        <div class="pagination" id="pagination"></div>
+    </div>
+
+    <script>
+        const products = [
+            // Water Closets
+            {
+                id: 1,
+                category: "wc",
+                image: "./bathroom/img1.jpg",
+               
+            },
+            {
+                id: 2,
+                category: "wc",
+                image: "./bathroom/img2.jpg",
+                icon: "🚽"
+            },
+            {
+                id: 3,
+                category: "wc",
+                image: "./bathroom/img3.jpg",
+                icon: "🚽"
+            },
+            {
+                id: 4,
+                category: "wc",
+                image: "./bathroom/img4.jpg",
+                icon: "🚽"
+            },
+            {
+                id: 5,
+                category: "wc",
+                image: "./bathroom/img5.jpg",
+                icon: "🚽"
+            },
+            {
+                id: 6,
+                category: "wc",
+                image: "./bathroom/img6.jpg",
+               
+            },
+            {
+                id: 7,
+                category: "wc",
+                image: "./bathroom/img7.jpg",
+               
+            },
+            {
+                id: 8,
+                category: "wc",
+                image: "./bathroom/img8.jpg",
+               
+            },
+            {
+                id: 9,
+                category: "wc",
+                image: "./bathroom/img9.jpg",
+               
+            },
+            {
+                id: 10,
+                category: "wc",
+                image: "./bathroom/img10.jpg",
+               
+            },
+            {
+                id: 11,
+                category: "wc",
+                image: "./bathroom/img11.jpg",
+               
+            },
+            {
+                id: 12,
+                category: "wc",
+                image: "./bathroom/img12.jpg",
+               
+            },
+            {
+                id: 13,
+                category: "wc",
+                image: "./bathroom/img13.jpg",
+               
+            },
+            {
+                id: 14,
+                category: "wc",
+                image: "./bathroom/img14.jpg",
+               
+            },
+            {
+                id: 15,
+                category: "wc",
+                image: "./bathroom/img15.jpg",
+               
+            },
+            // Premium Range
+            {
+                id: 16,
+                category: "wc",
+                image: "./bathroom/img16.jpg"
+            },
+            {
+                id: 17,
+                category: "wc",
+                image: "./bathroom/img17.jpg"
+            },
+            {
+                id: 18,
+                category: "wc",
+                image: "./bathroom/img18.jpg"
+            },
+            {
+                id: 19,
+                category: "wc",
+                image: "./bathroom/img19.jpg"
+            },
+            {
+                id: 20,
+                category: "wc",
+                image: "./bathroom/img20.jpg"
+            },
+            {
+                id: 21,
+                category: "wc",
+                image: "./bathroom/img21.jpg"
+            },
+            {
+                id: 22,
+                category: "wc",
+                image: "./bathroom/img22.jpg"
+            },
+            {
+                id: 23,
+                category: "wc",
+                image: "./bathroom/img23.jpg"
+            },
+            {
+                id: 24,
+                category: "wc",
+                image: "./bathroom/img24.jpg"
+            },
+            {
+                id: 25,
+                category: "wc",
+                image: "./bathroom/img25.jpg"
+            },
+            {
+                id: 26,
+                category: "wc",
+                image: "./bathroom/img26.jpg"
+            },
+            {
+                id: 27,
+                category: "wc",
+                image: "./bathroom/img27.jpg"
+            },
+            {
+                id: 28,
+                category: "wc",
+                image: "./bathroom/img28.jpg"
+            },
+            {
+                id: 29,
+                category: "wc",
+                image: "./bathroom/img29.jpg"
+            },
+            {
+                id: 30,
+                category: "wc",
+                image: "./bathroom/img30.jpg"
+            },
+            {
+                id: 31,
+                category: "wc",
+                image: "./bathroom/img31.jpg"
+            },
+            {
+                id: 32,
+                category: "wc",
+                image: "./bathroom/img32.jpg"
+            },
+            {
+                id: 33,
+                category: "wc",
+                image: "./bathroom/img33.jpg"
+            },
+            {
+                id: 34,
+                category: "wc",
+                image: "./bathroom/img34.jpg"
+            },
+            {
+                id: 35,
+                category: "wc",
+                image: "./bathroom/img35.jpg"   
+            },
+            {
+                id: 36,
+                category: "wc",
+                image: "./bathroom/img36.jpg"
+            },
+            {
+                id: 37,
+                category: "wc",
+                image: "./bathroom/img37.jpg"
+            },
+            {
+                id: 38,
+                category: "wc",
+                image: "./bathroom/img38.jpg"
+            },
+            {
+                id: 39,
+                category: "wc",
+                image: "./bathroom/img39.jpg"
+            },
+            {
+                id: 40,
+                category: "wc",
+                image: "./bathroom/img40.jpg"
+            },
+            {
+                id: 41,
+                category: "wc",
+                image: "./bathroom/img41.jpg"
+            },
+            {
+                id: 42,
+                category: "wc",
+                image: "./bathroom/img42.jpg"
+            },
+            {
+                id: 43,
+                category: "wc",
+                image: "./bathroom/img43.jpg"
+            },
+            {
+                id: 44,
+                category: "wc",
+                image: "./bathroom/img44.jpg"
+            },
+            {
+                id: 45,
+                category: "wc",
+                image: "./bathroom/img45.jpg"
+            },
+            {
+                id: 46,
+                category: "wc",
+                image: "./bathroom/img46.jpg"
+            },
+            {
+                id: 47,
+                category: "wc",
+                image: "./bathroom/img47.jpg"
+            },
+            {
+                id: 48,
+                category: "wc",
+                image: "./bathroom/img48.jpg"
+            },
+            {
+                id: 49,
+                category: "wc",
+                image: "./bathroom/img49.jpg"
+            },
+            {
+                id: 50,
+                category: "wc",
+                image: "./bathroom/img50.jpg"
+            },
+            {
+                id: 51,
+                category: "wc",
+                image: "./bathroom/img51.jpg"
+            },
+            {
+                id: 52,
+                category: "wc",
+                image: "./bathroom/img52.jpg"
+            },
+            {
+                id: 53,
+                category: "wc",
+                image: "./bathroom/img53.jpg"
+            },
+            {
+                id: 54,
+                category: "wc",
+                image: "./bathroom/img54.jpg"   
+            },
+            {
+                id: 55,
+                category: "wc",
+                image: "./bathroom/img55.jpg"
+            },
+            {
+                id: 56, 
+                category: "wc",
+                image: "./bathroom/img56.jpg"
+            },
+            {
+                id: 57,
+                category: "wc",
+                image: "./bathroom/img57.jpg"
+            },
+            {
+                id: 58,
+                category: "wc",
+                image: "./bathroom/img58.jpg"
+            },
+            {
+                id: 59,
+                category: "wc",
+                image: "./bathroom/img59.jpg"
+            },
+            {
+                id: 60,
+                category: "wc",
+                image: "./bathroom/img60.jpg"
+            },
+            {
+                id: 61,
+                category: "wc",
+                image: "./bathroom/img61.jpg"
+            },
+            {
+                id: 62,
+                category: "wc",
+                image: "./bathroom/img62.jpg"
+            },
+            {
+                id: 63,
+                category: "wc",
+                image: "./bathroom/img63.jpg"
+            },
+            {
+                id: 64,
+                category: "wc",
+                image: "./bathroom/img64.jpg"
+            },
+            {
+                id: 65,
+                category: "wc",
+                image: "./bathroom/img65.jpg"
+            },
+            {
+                id: 66,
+                category: "wc",
+                image: "./bathroom/img66.jpg"
+            },
+            {
+                id: 67,
+                category: "wc",
+                image: "./bathroom/img67.jpg"
+            },
+            {
+                id: 68,
+                category: "wc",
+                image: "./bathroom/img68.jpg"
+            },
+            {
+                id: 69,
+                category: "wc",
+                image: "./bathroom/img69.jpg"
+            },
+            {
+                id: 70,
+                category: "wc",
+                image: "./bathroom/img70.jpg"
+            },
+            {
+                id: 71,
+                category: "wc",
+                image: "./bathroom/img71.jpg"
+            },
+            {
+                id: 72,
+                category: "wc",
+                image: "./bathroom/img72.jpg"
+            },
+            {
+                id: 73,
+                category: "wc",
+                image: "./bathroom/img73.jpg"
+            },
+            {
+                id: 74,
+                category: "wc",
+                image: "./bathroom/img74.jpg"
+            },
+            {
+                id: 75,
+                category: "wc",
+                image: "./bathroom/img75.jpg"
+            },
+            {
+                id: 76,
+                category: "wc",
+                image: "./bathroom/img76.jpg"
+            },
+            {
+                id: 77,
+                category: "wc",
+                image: "./bathroom/img77.jpg"
+            },
+            {
+                id: 78,
+                category: "wc",
+                image: "./bathroom/img78.jpg"
+            },
+            {
+                id: 79,
+                category: "wc",
+                image: "./bathroom/img79.jpg"
+            },
+            {
+                id: 80,
+                category: "wc",
+                image: "./bathroom/img80.jpg"
+            },
+            {
+                id: 81,
+                category: "wc",
+                image: "./bathroom/img81.jpg"
+            },
+            // Wash Basins
+            {
+                id: 82,
+                category: "basin",
+                image: "./kitchen/img1.jpg"
+            },
+            {
+                id: 83,
+                category: "basin",
+                image: "./kitchen/img2.jpg"
+            },
+            {
+                id: 84,
+                category: "basin",
+                image: "./kitchen/img3.jpg"
+            },
+            {
+                id: 85,
+                category: "basin",
+                image: "./kitchen/img4.jpg"
+            },
+            {
+                id: 86,
+                category: "basin",
+                image: "./kitchen/img5.jpg"
+            },
+            {
+                id: 87,
+                category: "basin",
+                image: "./kitchen/img6.jpg"
+            },
+            {
+                id: 88,
+                category: "basin",
+                image: "./kitchen/img7.jpg"
+            },
+            {
+                id: 89,
+                category: "basin",
+                image: "./kitchen/img8.jpg"
+            },
+            {
+                id: 90,
+                category: "basin",
+                image: "./kitchen/img9.jpg"
+            },
+            {
+                id: 91,
+                category: "basin",
+                image: "./kitchen/img10.jpg"
+            },
+            {
+                id: 92,
+                category: "basin",
+                image: "./kitchen/img11.jpg"
+            },
+            {
+                id: 93,
+                category: "basin",
+                image: "./kitchen/img12.jpg"
+            },
+            {
+                id: 94,
+                category: "basin",
+                image: "./kitchen/img13.jpg"
+            },
+            {
+                id: 95,
+                category: "basin",
+                image: "./kitchen/img14.jpg"
+            },
+            {
+                id: 96,
+                category: "basin",
+                image: "./kitchen/img15.jpg"
+            },
+            {
+                id: 97,
+                category: "basin",
+                image: "./kitchen/img16.jpg"
+            },
+            {
+                id: 98,
+                category: "basin",
+                image: "./kitchen/img17.jpg"
+            },
+            {
+                id: 99,
+                category: "basin",
+                image: "./kitchen/img18.jpg"
+            },
+            {
+                id: 100,
+                category: "basin",
+                image: "./kitchen/img19.jpg"
+            },
+            {
+                id: 101,
+                category: "basin",
+                image: "./kitchen/img20.jpg"
+            },
+            {
+                id: 102,
+                category: "basin",
+                image: "./kitchen/img21.jpg"
+            },
+            {
+                id: 103,
+                category: "basin",
+                image: "./kitchen/img22.jpg"
+            },
+            {
+                id: 104,
+                category: "basin",
+                image: "./kitchen/img23.jpg"
+            },
+            {
+                id: 105,
+                category: "basin",
+                image: "./kitchen/img24.jpg"
+            },
+            {
+                id: 106,
+                category: "basin",
+                image: "./kitchen/img25.jpg"
+            },
+            {
+                id: 107,
+                category: "basin",
+                image: "./kitchen/img26.jpg"
+            },
+            {
+                id: 108,
+                category: "basin",
+                image: "./kitchen/img27.jpg"
+            },
+            {
+                id: 109,
+                category: "basin",
+                image: "./kitchen/img28.jpg"
+            },
+            {
+                id: 110,
+                category: "basin",
+                image: "./kitchen/img29.jpg"
+            },
+            {
+                id: 111,
+                category: "basin",
+                image: "./kitchen/img30.jpg"
+            },
+            {
+                id: 112,
+                category: "basin",
+                image: "./kitchen/img31.jpg"
+            },
+            {
+                id: 113,
+                category: "basin",
+                image: "./kitchen/img32.jpg"
+            },
+            {
+                id: 114,
+                category: "basin",
+                image: "./kitchen/img33.jpg"
+            },
+            {
+                id: 115,
+                category: "basin",
+                image: "./kitchen/img34.jpg"
+            },
+            {
+                id: 116,
+                category: "basin",
+                image: "./kitchen/img35.jpg"
+            },
+            {
+                id: 117,
+                category: "basin",
+                image: "./kitchen/img36.jpg"
+            },
+            {
+                id: 118,
+                category: "basin",
+                image: "./kitchen/img37.jpg"
+            },
+            {
+                id: 119,
+                category: "basin",
+                image: "./kitchen/img38.jpg"
+            },
+            {
+                id: 120,
+                category: "basin",
+                image: "./kitchen/img39.jpg"
+            },
+            {
+                id: 121,
+                category: "basin",
+                image: "./kitchen/img40.jpg"
+            },
+            {
+                id: 122,
+                category: "basin",
+                image: "./kitchen/img41.jpg"
+            },
+            {
+                id: 123,
+                category: "basin",
+                image: "./kitchen/img42.jpg"
+            },
+            {
+                id: 124,
+                category: "basin",
+                image: "./kitchen/img43.jpg"
+            },
+            {
+                id: 125,
+                category: "basin",
+                image: "./kitchen/img44.jpg"
+            },
+            {
+                id: 126,
+                category: "basin",
+                image: "./kitchen/img45.jpg"
+            },
+            // Complete Suites
+            {
+                id: 127,
+                category: "suite",
+                image: "./elevation/img1.jpg"
+            },
+            {
+                id: 128,
+                category: "suite",
+                image: "./elevation/img2.jpg"
+            },
+            {
+                id: 129,
+                category: "suite",
+                image: "./elevation/img3.jpg"  
+            },
+            {
+                id: 130,
+                category: "suite",
+                image: "./elevation/img4.jpg"
+            },
+            {
+                id: 131,
+                category: "suite",
+                image: "./elevation/img5.jpg"
+            },
+            {
+                id: 132,
+                category: "suite",
+                image: "./elevation/img6.jpg"
+            },
+            {
+                id: 133,
+                category: "suite",
+                image: "./elevation/img7.jpg"
+            },
+            {
+                id: 134,
+                category: "suite",
+                image: "./elevation/img8.jpg"
+            },
+            {
+                id: 135,
+                category: "suite",
+                image: "./elevation/img9.jpg"
+            },
+            {
+                id: 136,
+                category: "suite",
+                image: "./elevation/img10.jpg"
+            },
+            {
+                id: 137,
+                category: "suite",
+                image: "./elevation/img11.jpg"
+            },
+            {
+                id: 138,
+                category: "suite",
+                image: "./elevation/img12.jpg"
+            },
+            {
+                id: 139,
+                category: "suite",
+                image: "./elevation/img13.jpg"
+            },
+            {
+                id: 140,
+                category: "suite",
+                image: "./elevation/img14.jpg"
+            },
+            {
+                id: 141,
+                category: "suite",
+                image: "./elevation/img15.jpg"
+            },
+            {
+                id: 142,
+                category: "suite",
+                image: "./elevation/img16.jpg"
+            },
+            {
+                id: 143,
+                category: "suite",
+                image: "./elevation/img17.jpg"
+            }
+        ];
+
+        let currentPage = 1;
+        let currentCategory = 'all';
+        const itemsPerPage = 9;
+
+        function getFilteredProducts() {
+            if (currentCategory === 'all') {
+                return products;
+            }
+            return products.filter(product => product.category === currentCategory);
+        }
+
+        function renderProducts() {
+            const filteredProducts = getFilteredProducts();
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageProducts = filteredProducts.slice(startIndex, endIndex);
+
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            pageProducts.forEach((product, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                card.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="Product ${product.id}" class="product-img">
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+
+            updatePageInfo();
+            renderPagination();
+            
+            // Scroll to products grid
+            document.getElementById('productsGrid').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+
+        function getCategoryName(category) {
+            const names = {
+                'wc': 'Water Closet',
+                'basin': 'Wash Basin',
+                'suite': 'Complete Suite',
+                'premium': 'Premium Range'
+            };
+            return names[category] || category;
+        }
+
+        function updatePageInfo() {
+            const filteredProducts = getFilteredProducts();
+            const startIndex = (currentPage - 1) * itemsPerPage + 1;
+            const endIndex = Math.min(currentPage * itemsPerPage, filteredProducts.length);
+            const total = filteredProducts.length;
+
+            document.getElementById('pageInfo').textContent = 
+                `Showing ${startIndex}-${endIndex} of ${total} products`;
+        }
+
+        function renderPagination() {
+            const filteredProducts = getFilteredProducts();
+            const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+            const pagination = document.getElementById('pagination');
+            
+            pagination.innerHTML = '';
+
+            // Previous button
+            const prevBtn = document.createElement('button');
+            prevBtn.textContent = '← Previous';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.onclick = () => changePage(currentPage - 1);
+            pagination.appendChild(prevBtn);
+
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+                    const pageBtn = document.createElement('button');
+                    pageBtn.textContent = i;
+                    pageBtn.className = i === currentPage ? 'active' : '';
+                    pageBtn.onclick = () => changePage(i);
+                    pagination.appendChild(pageBtn);
+                } else if (i === currentPage - 3 || i === currentPage + 3) {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.textContent = '...';
+                    ellipsis.style.color = '#888';
+                    ellipsis.style.padding = '10px';
+                    pagination.appendChild(ellipsis);
+                }
+            }
+
+            // Next button
+            const nextBtn = document.createElement('button');
+            nextBtn.textContent = 'Next →';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.onclick = () => changePage(currentPage + 1);
+            pagination.appendChild(nextBtn);
+        }
+
+        function changePage(page) {
+            const filteredProducts = getFilteredProducts();
+            const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+            
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                renderProducts();
+            }
+        }
+
+        function setFilter(category) {
+            currentCategory = category;
+            currentPage = 1;
+            
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-category="${category}"]`).classList.add('active');
+            
+            renderProducts();
+        }
+
+        function goHome() {
+            alert('Navigating back to home page...');
+        }
+
+        // Event listeners
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                setFilter(btn.dataset.category);
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            
+            // Observe product cards for animations
+            setTimeout(() => {
+                document.querySelectorAll('.product-card').forEach(card => {
+                    observer.observe(card);
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
